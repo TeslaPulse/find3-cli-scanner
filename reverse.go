@@ -47,6 +47,7 @@ func ReverseScan(scanTime time.Duration) (sensors models.SensorData, err error) 
 		// gather packet information
 		// Open device
 		handle, err := pcap.OpenLive(wifiInterface, 2048, false, pcap.BlockForever)
+		handle.SetBPFFilter("wlan type mgt subtype deauth")
 		if err != nil {
 			return
 		}
